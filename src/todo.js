@@ -1,29 +1,23 @@
-const toDoList = [];
 let id = 0;
 
-function itemIndex(id) {
-    return toDoList.findIndex((item) => item.id ===id);
-}
-
-function createToDo(title, description, dueDate, priority, project) {
+export function createToDo(title, description, dueDate, priority, project) {
     id++;
-    const newToDo = { id, title, description, dueDate, priority, project, complete: false};
-    toDoList.push(newToDo);
-}
+    const toDoItem = { id, title, description, dueDate, priority, project, complete: false };
 
-function deleteToDo(id) {
-    toDoList.splice(itemIndex(id), 1);
+    function markAsComplete() {
+       this.complete = true;
 
-}
+        }
 
-function markAsComplete(id) {
-    toDoList[itemIndex(id)].complete = true;
+    function editToDo(property, newValue) {
+        this[property] = newValue;
+        }
+        
+    return { toDoItem, markAsComplete, editToDo }
+    
+    }   
 
-}
 
-function editToDo(id, property, newValue) {
-    toDoList[itemIndex(id)][property] = newValue;
 
-}
 
-export { createToDo, deleteToDo, markAsComplete, editToDo }
+
