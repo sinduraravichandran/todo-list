@@ -2,20 +2,28 @@ let id = 0;
 
 export function createToDo(title, description, dueDate, priority, project) {
     id++;
-    const toDoItem = { id, title, description, dueDate, priority, project, complete: false };
+    return { 
+        id, 
+        title, 
+        description, 
+        dueDate, 
+        priority, 
+        project, 
+        complete: false,
 
-    function markAsComplete() {
-       this.complete = true;
+        markComplete() {
+            this.complete = !this.complete;
+        },
 
+        editDueDate(newDate) {
+            this.dueDate = date;
+        },
+
+        editPriority(newPriority) {
+            this.priority = newPriority;
         }
-
-    function editToDo(property, newValue) {
-        this[property] = newValue;
-        }
-        
-    return { toDoItem, markAsComplete, editToDo }
-    
-    }   
+    }
+ }   
 
 
 
