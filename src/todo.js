@@ -1,9 +1,7 @@
-let id = 0;
-
 export function createToDo(title, description, dueDate, priority, project) {
-    id++;
+
     return { 
-        id, 
+        id: crypto.randomUUID(), 
         title, 
         description, 
         dueDate, 
@@ -16,14 +14,15 @@ export function createToDo(title, description, dueDate, priority, project) {
         },
 
         editDueDate(newDate) {
-            this.dueDate = date;
+            this.dueDate = newDate;
         },
 
         editPriority(newPriority) {
             this.priority = newPriority;
         }
     }
- }   
+ }  
+ 
 
 
 
