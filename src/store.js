@@ -9,11 +9,18 @@ const toDoListProjects = [];
 const defaultProject = createProject("My Project");
 toDoListProjects.push(defaultProject);
 
-export function addToDo(project) {
-    const item = createToDo(title, description, dueDate, priority, project);
-    toDoListProjects[project].toDoList.push(item)
-    
+export function addToDo(title, description, dueDate, priority, project) {
 
+    function returnProjectIndex(projectName) {
+        return toDoListProjects.findIndex((item) => item.name === projectName);
+    }
+
+    const newToDo = createToDo(title, description, dueDate, priority, project);
+    toDoListProjects[returnProjectIndex(project)].toDoList.push(newToDo)
 }
 
-//shoot rn it's only 1:1 relationship of project to list, but you should have many lists for a project so I need to fix that
+
+addToDo("hi", "desc", "10/2", "high", "My Project")  
+console.log(toDoListProjects[0].toDoList)
+
+//do we need to let user create new projects
