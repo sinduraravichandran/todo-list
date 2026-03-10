@@ -1,7 +1,7 @@
 //should this be the file that just manages / stores all the game stuff? is this the main file? 
 import { createProject } from "./project.js"
 import { createToDo } from "./todo.js"
-import { createProject } from "./project.js";
+
 
 //this is the array that will hold project objects. project objects will hold to-do-lists
 const toDoListProjects = [];
@@ -26,6 +26,10 @@ export function addProject(name) {
     const newProject = createProject(name);
     toDoListProjects.push(newProject);
     
+}
+
+export function getProjects() {
+    return toDoListProjects;
 }
 
 addToDo("hi", "desc", "10/2", "high", "My Project")  
