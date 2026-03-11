@@ -6,10 +6,6 @@ import { createToDo } from "./todo.js"
 //this is the array that will hold project objects. project objects will hold to-do-lists
 const toDoListProjects = [];
 
-//create the default project 
-const defaultProject = createProject("My Project");
-toDoListProjects.push(defaultProject);
-
 //call createToDo and add it to array
 export function addToDo(title, description, dueDate, priority, project) {
 
@@ -25,12 +21,11 @@ export function addToDo(title, description, dueDate, priority, project) {
 export function addProject(name) {
     const newProject = createProject(name);
     toDoListProjects.push(newProject);
-    
+    return newProject;
 }
 
 export function getProjects() {
     return toDoListProjects;
 }
 
-addToDo("hi", "desc", "10/2", "high", "My Project")  
-console.log(toDoListProjects[0].toDoList)
+
