@@ -4,6 +4,7 @@ import { renderProjects } from "./dashboard.js";
 
 //create the default project and add it to the ui
 addProject("Default Project");
+addProject("Another Project")
 renderProjects();
 
 

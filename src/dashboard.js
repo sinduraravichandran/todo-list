@@ -1,8 +1,25 @@
-import { getProjects } from "./store.js"
+import { getProjects, addProject } from "./store.js"
 import "./style.css"
 
 //get html elements
 const content = document.getElementById("content");
+const newProjectButton = document.getElementById("newProjectButton");
+const dialog = document.getElementById("dialog");
+const dialogButton = document.getElementById("close-dialog-btn");
+
+//bind events
+export function bindEvents() {
+    newProjectButton.addEventListener("click", () => {
+        dialog.showModal();
+
+        //const projectName = 
+       // addProject(projectName);
+
+    })
+
+}
+
+bindEvents()
 
 //get projects & display on the UI
 export function renderProjects() {
@@ -14,14 +31,11 @@ export function renderProjects() {
         newDiv.classList.add("project");
 
         //add project details 
-        newDiv.innertext = element.name;
+        newDiv.innerText = element.name;
         content.appendChild(newDiv);
 
-        
+        //add new todo item button
 
 
     });
 }
-
-
-//figure out why the text is not showing up in the UI on the project
