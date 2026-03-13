@@ -5,18 +5,30 @@ import "./style.css"
 const content = document.getElementById("content");
 const newProjectButton = document.getElementById("newProjectButton");
 const dialog = document.getElementById("dialog");
-const dialogButton = document.getElementById("close-dialog-btn");
+const createDialogButton = document.getElementById("close-dialog-btn");
+const cancelDialogButton = document.getElementById("cancel-dialog-btn");
+const projectNameInput = document.getElementById("projectName");
 
 //bind events
 export function bindEvents() {
-    newProjectButton.addEventListener("click", () => {
-        dialog.showModal();
+    newProjectButton.addEventListener("click", openDialog);
+    cancelDialogButton.addEventListener("click", closeDialog);
+    createDialogButton.addEventListener("click", createProjectUI)
+    }
 
-        //const projectName = 
-       // addProject(projectName);
+function openDialog() {
+    dialog.showModal();
+}
 
-    })
+function closeDialog() {
+    dialog.close();
+}
 
+function createProjectUI() {
+    addProject(projectNameInput.value);
+    projectNameInput.innerText = '';
+    dialog.close();
+    renderProjects();
 }
 
 bindEvents()
