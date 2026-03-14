@@ -21,3 +21,11 @@ body {
     gap: 10px;
 
 }
+
+.item {
+    width: 50px;
+    height: 150px;
+    background-color: magenta;
+    color: white;
+    border: 1px grey solid;
+}

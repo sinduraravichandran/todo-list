@@ -36,18 +36,32 @@ bindEvents()
 //get projects & display on the UI
 export function renderProjects() {
     const projects = getProjects();
+
+    content.innerHTML = '';
+
     projects.forEach(element => {
-        console.log(element.name)
-        //create div & add class
-        const newDiv = document.createElement("div");
-        newDiv.classList.add("project");
+    
+        //create project div & add class
+        const newProjectDiv = document.createElement("div");
+        newProjectDiv.classList.add("project");
 
         //add project details 
-        newDiv.innerText = element.name;
-        content.appendChild(newDiv);
+        newProjectDiv.innerText = element.name;
+        content.appendChild(newProjectDiv);
 
-        //add new todo item button
+        //for each item in the to do list array
+        element.toDoList.forEach(listItem => {
 
+            //create new to do div and add class
+            const newItemDiv = document.createElement("div");
+            newItemDiv.classList.add("item");
+
+            //add item details
+            newItemDiv.innerText = listItem.title;
+            newProjectDiv.appendChild(newItemDiv);
+
+        })
 
     });
 }
+

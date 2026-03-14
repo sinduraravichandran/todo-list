@@ -1,10 +1,11 @@
-import { addProject, getProjects } from "./store.js"
+import { addProject, addToDo, getProjects } from "./store.js"
 import { renderProjects } from "./dashboard.js";
 
 
 //create the default project and add it to the ui
 addProject("Default Project");
-addProject("Another Project")
+addProject("Another Project");
+addToDo("title", 'description', 'duedate', 'priority','Another Project');
 renderProjects();
 
 

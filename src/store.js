@@ -8,7 +8,6 @@ const toDoListProjects = [];
 
 //call createToDo and add it to array
 export function addToDo(title, description, dueDate, priority, project) {
-
     function returnProjectIndex(projectName) {
         return toDoListProjects.findIndex((item) => item.name === projectName);
     }
