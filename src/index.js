@@ -5,7 +5,8 @@ import { renderProjects } from "./dashboard.js";
 //create the default project and add it to the ui
 addProject("Default Project");
 addProject("Another Project");
-addToDo("title", 'description', 'duedate', 'priority','Another Project');
+addToDo("call doctor", 'call obgyn', 'october 3', 'high','Another Project');
+addToDo("call doctor", 'call obgyn', 'october 3', 'high','Another Project');
 renderProjects();
 
 

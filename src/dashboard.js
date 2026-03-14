@@ -11,16 +11,19 @@ const projectNameInput = document.getElementById("projectName");
 
 //bind events
 export function bindEvents() {
-    newProjectButton.addEventListener("click", openDialog);
-    cancelDialogButton.addEventListener("click", closeDialog);
+    content.addEventListener("click", (event) => {
+        console.log(event.target)
+    })
+    newProjectButton.addEventListener("click", openProjectDialog);
+    cancelDialogButton.addEventListener("click", closeProjectDialog);
     createDialogButton.addEventListener("click", createProjectUI)
     }
 
-function openDialog() {
+function openProjectDialog() {
     dialog.showModal();
 }
 
-function closeDialog() {
+function closeProjectDialog() {
     dialog.close();
 }
 
@@ -29,6 +32,10 @@ function createProjectUI() {
     projectNameInput.innerText = '';
     dialog.close();
     renderProjects();
+}
+
+function addToDoUI() {
+
 }
 
 bindEvents()
@@ -57,11 +64,21 @@ export function renderProjects() {
             newItemDiv.classList.add("item");
 
             //add item details
-            newItemDiv.innerText = listItem.title;
+            newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
             newProjectDiv.appendChild(newItemDiv);
 
         })
 
+        //add new todo button
+        const newItemButton = document.createElement("button");
+        newItemButton.innerText = "Add To Do";
+        newProjectDiv.appendChild(newItemButton);
+
+
     });
 }
 
+//refactor eventListeners so they only fire at the top, for now, just add one for 
+//content so that i can add it to the new addItem button
+
+//next up is to make the add item button functional. Create a modal to HTML
