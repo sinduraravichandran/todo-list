@@ -8,12 +8,33 @@
     <body>
         <h1>To-Do List</h1>
         <button id="newProjectButton">Create New Project</button>
-        <dialog id="dialog">
+        <dialog id="project-dialog">
             <h2>New Project</h2>
-            <label for="projectName">Enter new project name</label>
-            <input type="text" id="projectName">
-            <button id="close-dialog-btn">Create</button>
-            <button id="cancel-dialog-btn">Cancel</button>
+            <label for="project-name">Enter new project name: </label>
+            <input type="text" id="project-name">
+            <button id="create-project-dialog-btn">Create</button>
+            <button id="cancel-project-dialog-btn">Cancel</button>
+        </dialog>
+        <dialog id="task-dialog">
+            <h2>New Task</h2>
+            <label for="task-name">Name:</label>
+            <input type="text" id="task-name">
+            <label for="task-description">Description:</label>
+            <input type="text" id="task-description">
+            <label for="task-due-date">Due Date:</label>
+            <input type="date" id="task-due-date">
+            <label for="task-priority">Priority:</label>
+            <label>
+                <input type="radio" name="task-priority" value="low">Low
+            </label>
+            <label>
+                <input type="radio" name="task-priority" value="medium">Medium
+            </label>
+            <label>
+                <input type="radio" name="task-priority" value="medium">High
+            </label>
+            <button id="create-task-dialog-btn">Create</button>
+            <button id="cancel-task-dialog-btn">Cancel</button>
         </dialog>
         <div id="content"></div>
     </body>

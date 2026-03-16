@@ -4,38 +4,58 @@ import "./style.css"
 //get html elements
 const content = document.getElementById("content");
 const newProjectButton = document.getElementById("newProjectButton");
-const dialog = document.getElementById("dialog");
-const createDialogButton = document.getElementById("close-dialog-btn");
-const cancelDialogButton = document.getElementById("cancel-dialog-btn");
-const projectNameInput = document.getElementById("projectName");
+const projectDialog = document.getElementById("project-dialog");
+const createProjectDialogButton = document.getElementById("create-project-dialog-btn");
+const cancelProjectDialogButton = document.getElementById("cancel-project-dialog-btn");
+const projectNameInput = document.getElementById("project-name");
+const taskDialog = document.getElementById("task-dialog");
+const createTaskDialogButton = document.getElementById("create-task-dialog-btn");
+const cancelTaskDialogButton = document.getElementById("cancel-task-dialog-btn");
+const tasktNameInput = document.getElementById("task-name");
 
 //bind events
 export function bindEvents() {
     content.addEventListener("click", (event) => {
         console.log(event.target)
+        if (event.target.classList.contains("addToDoButton")) {
+            taskDialog.showModal()
+            return;
+        } else if (event.target.id === "cancel-task-dialog-btn") {
+            taskDialog.close();
+        }
+
     })
-    newProjectButton.addEventListener("click", openProjectDialog);
-    cancelDialogButton.addEventListener("click", closeProjectDialog);
-    createDialogButton.addEventListener("click", createProjectUI)
     }
 
 function openProjectDialog() {
-    dialog.showModal();
+    projectDialog.showModal();
 }
 
 function closeProjectDialog() {
-    dialog.close();
+    projectDialog.close();
 }
 
 function createProjectUI() {
     addProject(projectNameInput.value);
     projectNameInput.innerText = '';
-    dialog.close();
+    projectDialog.close();
     renderProjects();
 }
 
-function addToDoUI() {
+function openTaskDialog() {
+    taskDialog.showModal();
+}
 
+function closeTaskDialog() {
+    taskDialog.close();
+}
+
+function createTaskUI() {
+
+    addProject(projectNameInput.value);
+    projectNameInput.innerText = '';
+    projectDialog.close();
+    renderProjects();
 }
 
 bindEvents()
@@ -72,8 +92,9 @@ export function renderProjects() {
         //add new todo button
         const newItemButton = document.createElement("button");
         newItemButton.innerText = "Add To Do";
+        newItemButton.id = element.id;
+        newItemButton.classList.add("addToDoButton");
         newProjectDiv.appendChild(newItemButton);
-
 
     });
 }

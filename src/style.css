@@ -5,8 +5,9 @@
 }
 
 body {
-    background-color: blue;
-    margin: 10px;
+    background-color: lightblue;
+    margin-left: 200px;
+
 }
 
 .project {
@@ -32,4 +33,17 @@ body {
     color: white;
     border: 1px grey solid;
     padding: 5px;
+}
+
+.addToDoButton {
+    background-color: plum;
+    padding: 10px;
+    border-radius: 20px;
+
+}
+
+dialog {
+    margin: auto;
+    width: 30%;
+    height: 30%;
 }
