@@ -12,18 +12,24 @@ const taskDialog = document.getElementById("task-dialog");
 const createTaskDialogButton = document.getElementById("create-task-dialog-btn");
 const cancelTaskDialogButton = document.getElementById("cancel-task-dialog-btn");
 const tasktNameInput = document.getElementById("task-name");
+const taskDescription = document.getElementById("task-description");
+const taskDueDate = document.getElementById("task-due-date");
+const taskPriority = document.querySelectorAll('input[name="task-priority"]');
+
 
 //bind events
 export function bindEvents() {
+    newProjectButton.addEventListener("click", openProjectDialog);
+    createProjectDialogButton.addEventListener("click", createProjectUI);
+    cancelProjectDialogButton.addEventListener("click", closeProjectDialog);
+
+
     content.addEventListener("click", (event) => {
         console.log(event.target)
         if (event.target.classList.contains("addToDoButton")) {
-            taskDialog.showModal()
+            taskDialog.showModal();
             return;
-        } else if (event.target.id === "cancel-task-dialog-btn") {
-            taskDialog.close();
-        }
-
+        } 
     })
     }
 
@@ -52,13 +58,14 @@ function closeTaskDialog() {
 
 function createTaskUI() {
 
+    addToDo()
     addProject(projectNameInput.value);
     projectNameInput.innerText = '';
     projectDialog.close();
     renderProjects();
 }
 
-bindEvents()
+bindEvents();
 
 //get projects & display on the UI
 export function renderProjects() {

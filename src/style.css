@@ -27,6 +27,10 @@ body {
 
 }
 
+input {
+    border: 1px black solid;
+}
+
 .item {
     width: 80%;
     background-color: magenta;
@@ -44,6 +48,8 @@ body {
 
 dialog {
     margin: auto;
-    width: 30%;
-    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }

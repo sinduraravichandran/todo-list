@@ -24,15 +24,12 @@
             <label for="task-due-date">Due Date:</label>
             <input type="date" id="task-due-date">
             <label for="task-priority">Priority:</label>
-            <label>
-                <input type="radio" name="task-priority" value="low">Low
-            </label>
-            <label>
-                <input type="radio" name="task-priority" value="medium">Medium
-            </label>
-            <label>
-                <input type="radio" name="task-priority" value="medium">High
-            </label>
+            <input type="radio" id="low" name="task-priority" value="low">
+            <label for="low">Low</label>
+            <input type="radio" id="medium" name="task-priority" value="medium">
+            <label for="medium">Medium</label>
+            <input type="radio" id="high" name="task-priority" value="high">
+            <label for="high">High</label>
             <button id="create-task-dialog-btn">Create</button>
             <button id="cancel-task-dialog-btn">Cancel</button>
         </dialog>
