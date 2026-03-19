@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    border: 0;;
+    border: 0;
 }
 
 body {
@@ -46,7 +46,7 @@ input {
 
 }
 
-dialog {
+dialog:open {
     margin: auto;
     display: flex;
     flex-direction: column;

@@ -22,12 +22,13 @@ export function bindEvents() {
     newProjectButton.addEventListener("click", openProjectDialog);
     createProjectDialogButton.addEventListener("click", createProjectUI);
     cancelProjectDialogButton.addEventListener("click", closeProjectDialog);
+    cancelTaskDialogButton.addEventListener("click", closeTaskDialog);
 
 
     content.addEventListener("click", (event) => {
         console.log(event.target)
         if (event.target.classList.contains("addToDoButton")) {
-            taskDialog.showModal();
+            openTaskDialog();
             return;
         } 
     })
