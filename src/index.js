@@ -1,14 +1,12 @@
-import { addProject, addToDo, getProjects } from "./store.js"
-import { renderProjects } from "./dashboard.js";
+import { addProject, addToDo } from "./store.js"
+import { renderProjects, bindEvents } from "./dashboard.js";
 
 
 //create the default project and add it to the ui
 addProject("Default Project");
 addProject("Another Project");
-addToDo("call doctor", 'call obgyn', 'october 3', 'high','Another Project');
-addToDo("call doctor", 'call obgyn', 'october 3', 'high','Another Project');
 renderProjects();
-
+bindEvents();
 
 
 

@@ -1,4 +1,4 @@
-import { getProjects, addProject } from "./store.js"
+import { getProjects, addProject, addToDo } from "./store.js"
 import "./style.css"
 
 //get html elements
@@ -11,10 +11,11 @@ const projectNameInput = document.getElementById("project-name");
 const taskDialog = document.getElementById("task-dialog");
 const createTaskDialogButton = document.getElementById("create-task-dialog-btn");
 const cancelTaskDialogButton = document.getElementById("cancel-task-dialog-btn");
-const tasktNameInput = document.getElementById("task-name");
+const tasktName = document.getElementById("task-name");
 const taskDescription = document.getElementById("task-description");
 const taskDueDate = document.getElementById("task-due-date");
 const taskPriority = document.querySelectorAll('input[name="task-priority"]');
+let addToDoProjectId;
 
 
 //bind events
@@ -23,12 +24,12 @@ export function bindEvents() {
     createProjectDialogButton.addEventListener("click", createProjectUI);
     cancelProjectDialogButton.addEventListener("click", closeProjectDialog);
     cancelTaskDialogButton.addEventListener("click", closeTaskDialog);
-
+    createTaskDialogButton.addEventListener("click", createTaskUI);
 
     content.addEventListener("click", (event) => {
-        console.log(event.target)
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();
+            addToDoProjectId = event.target.id;
             return;
         } 
     })
@@ -44,7 +45,7 @@ function closeProjectDialog() {
 
 function createProjectUI() {
     addProject(projectNameInput.value);
-    projectNameInput.innerText = '';
+    projectNameInput.value = '';
     projectDialog.close();
     renderProjects();
 }
@@ -58,15 +59,16 @@ function closeTaskDialog() {
 }
 
 function createTaskUI() {
-
-    addToDo()
-    addProject(projectNameInput.value);
-    projectNameInput.innerText = '';
-    projectDialog.close();
+    const taskPriority = document.querySelector('input[name="task-priority"]:checked').value;
+    addToDo(tasktName.value, taskDescription.value, taskDueDate.value, taskPriority, addToDoProjectId);
+    console.log(getProjects());
+    tasktName.value = '';
+    taskDescription.value = '';
+    taskDueDate.value = '';
+    //taskPriority.forEach(radio => radio.checked = false);
+    taskDialog.close();
     renderProjects();
 }
-
-bindEvents();
 
 //get projects & display on the UI
 export function renderProjects() {
@@ -74,6 +76,7 @@ export function renderProjects() {
 
     content.innerHTML = '';
 
+    //for each project in the array
     projects.forEach(element => {
     
         //create project div & add class
@@ -107,7 +110,5 @@ export function renderProjects() {
     });
 }
 
-//refactor eventListeners so they only fire at the top, for now, just add one for 
-//content so that i can add it to the new addItem button
 
-//next up is to make the add item button functional. Create a modal to HTML
+//next up is to figure out how to clear the radio button after adding a task
