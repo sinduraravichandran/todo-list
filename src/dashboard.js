@@ -44,10 +44,15 @@ function closeProjectDialog() {
 }
 
 function createProjectUI() {
-    addProject(projectNameInput.value);
-    projectNameInput.value = '';
-    projectDialog.close();
-    renderProjects();
+    
+    if (projectNameInput.value === '') {
+        alert("Project name is required")
+    } else {
+        addProject(projectNameInput.value);
+        projectNameInput.value = '';
+        projectDialog.close();
+        renderProjects();
+    }
 }
 
 function openTaskDialog() {
@@ -59,15 +64,24 @@ function closeTaskDialog() {
 }
 
 function createTaskUI() {
-    const taskPriority = document.querySelector('input[name="task-priority"]:checked').value;
-    addToDo(tasktName.value, taskDescription.value, taskDueDate.value, taskPriority, addToDoProjectId);
-    console.log(getProjects());
-    tasktName.value = '';
-    taskDescription.value = '';
-    taskDueDate.value = '';
-    //taskPriority.forEach(radio => radio.checked = false);
-    taskDialog.close();
-    renderProjects();
+
+    if (tasktName.value === '' || 
+        taskDescription.value === '' ||
+        taskDueDate.value === '' || 
+        taskPriority.forEach(radio => radio.checked === false)
+    ) {
+        alert("Enter all values")
+
+    } else {
+        const taskPrioritySelected = document.querySelector('input[name="task-priority"]:checked').value;
+        addToDo(tasktName.value, taskDescription.value, taskDueDate.value, taskPrioritySelected, addToDoProjectId);
+        tasktName.value = '';
+        taskDescription.value = '';
+        taskDueDate.value = '';
+        taskPriority.forEach(radio => radio.checked = false);
+        taskDialog.close();
+        renderProjects();
+    }
 }
 
 //get projects & display on the UI
@@ -87,7 +101,7 @@ export function renderProjects() {
         newProjectDiv.innerText = element.name;
         content.appendChild(newProjectDiv);
 
-        //for each item in the to do list array
+        //for each item in the to do list array (each item is a task)
         element.toDoList.forEach(listItem => {
 
             //create new to do div and add class
@@ -97,6 +111,11 @@ export function renderProjects() {
             //add item details
             newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
             newProjectDiv.appendChild(newItemDiv);
+
+            //add edit to do button 
+            const editTaskButton = document.createElement("button");
+            newItemDiv.appendChild(editTaskButton);
+            
 
         })
 
@@ -111,4 +130,3 @@ export function renderProjects() {
 }
 
 
-//next up is to figure out how to clear the radio button after adding a task

@@ -12,10 +12,8 @@ export function addToDo(title, description, dueDate, priority, project) {
         return toDoListProjects.findIndex((item) => item.id === projectId);
     }
     const newToDo = createToDo(title, description, dueDate, priority, project);
-    console.log(newToDo)
-    
+        
     toDoListProjects[returnProjectIndex(project)].toDoList.push(newToDo)
-    console.log('hi')
 }
 
 //call createProject and add it to array
