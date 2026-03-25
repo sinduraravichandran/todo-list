@@ -31,7 +31,10 @@ export function bindEvents() {
             openTaskDialog();
             addToDoProjectId = event.target.id;
             return;
-        } 
+        } else if (event.target.classList.contains("editToDoButton")) {
+            //edit todo
+
+        }
     })
     }
 
@@ -114,6 +117,8 @@ export function renderProjects() {
 
             //add edit to do button 
             const editTaskButton = document.createElement("button");
+            editTaskButton.innerText = 'Edit Task';
+            editTaskButton.classList.add("editToDoButton")
             newItemDiv.appendChild(editTaskButton);
             
 

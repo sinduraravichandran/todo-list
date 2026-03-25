@@ -19,7 +19,15 @@ export function createToDo(title, description, dueDate, priority, project) {
 
         editPriority(newPriority) {
             this.priority = newPriority;
-        }
+        },
+
+        editTitle(newTitle) {
+            this.title = newTitle;
+        },
+
+        editDescription(newDescription) {
+            this.description = newDescription;
+        },
     }
  }  
  
