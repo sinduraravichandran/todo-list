@@ -110,10 +110,17 @@ export function renderProjects() {
             //create new to do div and add class
             const newItemDiv = document.createElement("div");
             newItemDiv.classList.add("item");
+            newProjectDiv.appendChild(newItemDiv);
 
             //add item details
-            newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
-            newProjectDiv.appendChild(newItemDiv);
+            const titleLabel = document.createElement("label");
+            const titleInput = document.createElement("input");
+            titleLabel.textContent = "Title: "
+            titleInput.value = listItem.title;
+            titleInput.id = "title-input"
+            newItemDiv.append(titleLabel, titleInput)
+            //newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
+            //newProjectDiv.appendChild(newItemDiv);
 
             //add edit to do button 
             const editTaskButton = document.createElement("button");
@@ -135,3 +142,4 @@ export function renderProjects() {
 }
 
 
+//try to get the input to disappear so its' like type to edit style
