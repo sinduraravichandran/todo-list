@@ -1,4 +1,3 @@
-//should this be the file that just manages / stores all the game stuff? is this the main file? 
 import { createProject } from "./project.js"
 import { createToDo } from "./todo.js"
 

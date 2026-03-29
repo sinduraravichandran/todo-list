@@ -16,6 +16,7 @@ const taskDescription = document.getElementById("task-description");
 const taskDueDate = document.getElementById("task-due-date");
 const taskPriority = document.querySelectorAll('input[name="task-priority"]');
 let addToDoProjectId;
+let editToDoTaskId;
 
 
 //bind events
@@ -27,16 +28,23 @@ export function bindEvents() {
     createTaskDialogButton.addEventListener("click", createTaskUI);
 
     content.addEventListener("click", (event) => {
+        console.log(event);
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();
             addToDoProjectId = event.target.id;
             return;
-        } else if (event.target.classList.contains("editToDoButton")) {
-            //edit todo
-
+        } else if (event.target.classList.contains("edit-task-input")) {
+            console.log('hi');
+            //show edit and cancel buttons
         }
     })
     }
+
+function showSaveAndCancel() {
+    const saveButton = document.createElement("button");
+    const editButton = document.createElement("button");
+
+}
 
 function openProjectDialog() {
     projectDialog.showModal();
@@ -93,6 +101,8 @@ export function renderProjects() {
 
     content.innerHTML = '';
 
+
+
     //for each project in the array
     projects.forEach(element => {
     
@@ -110,23 +120,20 @@ export function renderProjects() {
             //create new to do div and add class
             const newItemDiv = document.createElement("div");
             newItemDiv.classList.add("item");
+            newItemDiv.id = listItem.id;
             newProjectDiv.appendChild(newItemDiv);
 
-            //add item details
+            //add item details -- title 
+            const titleDiv = document.createElement("div");
             const titleLabel = document.createElement("label");
             const titleInput = document.createElement("input");
             titleLabel.textContent = "Title: "
             titleInput.value = listItem.title;
-            titleInput.id = "title-input"
-            newItemDiv.append(titleLabel, titleInput)
+            titleInput.classList.add("edit-task-input")
+            titleDiv.append(titleLabel, titleInput);
+            newItemDiv.appendChild(titleDiv);
             //newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
-            //newProjectDiv.appendChild(newItemDiv);
-
-            //add edit to do button 
-            const editTaskButton = document.createElement("button");
-            editTaskButton.innerText = 'Edit Task';
-            editTaskButton.classList.add("editToDoButton")
-            newItemDiv.appendChild(editTaskButton);
+            
             
 
         })
@@ -142,4 +149,5 @@ export function renderProjects() {
 }
 
 
-//try to get the input to disappear so its' like type to edit style
+//where I left off, i created a titleDiv and appended titleLable and titleInput to it
+//when a user clicks on the input, it should show the cancel and edit buttons
