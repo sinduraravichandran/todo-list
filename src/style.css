@@ -11,8 +11,6 @@ body {
 }
 
 .project {
-    width: 200px;
-    height: 600px;
     background-color: aliceblue;
     color: black;
     display: flex;
@@ -31,10 +29,7 @@ input {
     border: 1px black solid;
 }
 
-title-input {
-    
 
-}
 
 .item {
     width: 80%;
@@ -63,4 +58,8 @@ dialog:open {
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+}
+
+.title-div {
+    display: flex;
 }

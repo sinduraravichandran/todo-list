@@ -28,22 +28,25 @@ export function bindEvents() {
     createTaskDialogButton.addEventListener("click", createTaskUI);
 
     content.addEventListener("click", (event) => {
-        console.log(event);
+
+        const titleDiv = document.getElementById("title-div")
+
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();
             addToDoProjectId = event.target.id;
             return;
-        } else if (event.target.classList.contains("edit-task-input")) {
-            console.log('hi');
-            //show edit and cancel buttons
+        } else if (event.target.id === "task-title") {
+            showSaveAndCancel(titleDiv);
         }
     })
     }
 
-function showSaveAndCancel() {
+function showSaveAndCancel(divClicked) {
     const saveButton = document.createElement("button");
     const editButton = document.createElement("button");
-
+    saveButton.innerText = "Save";
+    editButton.innerText = "Edit";
+    divClicked.append(editButton, saveButton);
 }
 
 function openProjectDialog() {
@@ -129,7 +132,8 @@ export function renderProjects() {
             const titleInput = document.createElement("input");
             titleLabel.textContent = "Title: "
             titleInput.value = listItem.title;
-            titleInput.classList.add("edit-task-input")
+            titleInput.id = "task-title"
+            titleDiv.id = "title-div"
             titleDiv.append(titleLabel, titleInput);
             newItemDiv.appendChild(titleDiv);
             //newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
