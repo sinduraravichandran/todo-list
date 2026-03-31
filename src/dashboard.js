@@ -1,4 +1,4 @@
-import { getProjects, addProject, addToDo } from "./store.js"
+import { getProjects, addProject, addToDo, findToDo } from "./store.js"
 import "./style.css"
 
 //get html elements
@@ -36,17 +36,26 @@ export function bindEvents() {
             addToDoProjectId = event.target.id;
             return;
         } else if (event.target.id === "task-title") {
-            showSaveAndCancel(titleDiv);
+            showSaveAndCancel(titleDiv, event.target);
         }
     })
     }
 
-function showSaveAndCancel(divClicked) {
+function showSaveAndCancel(divClicked, inputClicked) {
+
+    //create save and edit buttons
     const saveButton = document.createElement("button");
     const editButton = document.createElement("button");
     saveButton.innerText = "Save";
     editButton.innerText = "Edit";
     divClicked.append(editButton, saveButton);
+
+    saveButton.addEventListener("click", (event) => {
+        const toDo = findToDo(event.target.closest(".item").id);
+        toDo.editTitle(inputClicked.value)
+
+    })
+
 }
 
 function openProjectDialog() {
@@ -153,5 +162,5 @@ export function renderProjects() {
 }
 
 
-//where I left off, i created a titleDiv and appended titleLable and titleInput to it
-//when a user clicks on the input, it should show the cancel and edit buttons
+//where I left off, added edit and save button, next need to make them functional
+//and also add edit/save buttons for other inputs too

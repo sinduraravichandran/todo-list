@@ -26,4 +26,18 @@ export function getProjects() {
     return toDoListProjects;
 }
 
+export function findToDo(id) {
+    for (let i=0; i<toDoListProjects.length; i++) {
+        for (let j=0; j<toDoListProjects[i].toDoList.length; j++) {
+            if (toDoListProjects[i].toDoList[j].id === id) {
+                return toDoListProjects[i].toDoList[j];
+            }
+        }
+    }
+
+
+
+}
+
+
 
