@@ -36,26 +36,34 @@ export function bindEvents() {
             addToDoProjectId = event.target.id;
             return;
         } else if (event.target.id === "task-title") {
-            showSaveAndCancel(titleDiv, event.target);
+            showSaveAndCancel(titleDiv);
+        } else if (event.target.id === "save-input") {
+            const toDo = findToDo(event.target.closest(".item").id);
+            toDo.editTitle(event.target.parentElement.querySelector("input").value);
+            hideSaveAndCancel();
+        } else if (event.target.id === "cancel-input") {
+            hideSaveAndCancel();
         }
     })
     }
 
-function showSaveAndCancel(divClicked, inputClicked) {
+function showSaveAndCancel(divClicked) {
 
-    //create save and edit buttons
+    //create save and cancel buttons
     const saveButton = document.createElement("button");
-    const editButton = document.createElement("button");
+    const cancelButton = document.createElement("button");
+    saveButton.id = "save-input";
+    cancelButton.id = "cancel-input"
     saveButton.innerText = "Save";
-    editButton.innerText = "Edit";
-    divClicked.append(editButton, saveButton);
+    cancelButton.innerText = "Cancel";
+    divClicked.append(cancelButton, saveButton);
+}
 
-    saveButton.addEventListener("click", (event) => {
-        const toDo = findToDo(event.target.closest(".item").id);
-        toDo.editTitle(inputClicked.value)
-
-    })
-
+function hideSaveAndCancel() {
+    const saveButton = document.getElementById("save-input");
+    const cancelButton = document.getElementById("cancel-input");
+    saveButton.remove();
+    cancelButton.remove();
 }
 
 function openProjectDialog() {
@@ -162,5 +170,3 @@ export function renderProjects() {
 }
 
 
-//where I left off, added edit and save button, next need to make them functional
-//and also add edit/save buttons for other inputs too
