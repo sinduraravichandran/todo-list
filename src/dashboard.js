@@ -29,17 +29,18 @@ export function bindEvents() {
 
     content.addEventListener("click", (event) => {
 
-        const titleDiv = document.getElementById("title-div")
 
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();
             addToDoProjectId = event.target.id;
             return;
         } else if (event.target.id === "task-title") {
-            showSaveAndCancel(titleDiv);
+            showSaveAndCancel(event.target.closest("div"));
         } else if (event.target.id === "save-input") {
             const toDo = findToDo(event.target.closest(".item").id);
-            toDo.editTitle(event.target.parentElement.querySelector("input").value);
+            if (event.target.closest("div").classList.contains("title-div")) {
+                toDo.editTitle(event.target.parentElement.querySelector("input").value);
+            }
             hideSaveAndCancel();
         } else if (event.target.id === "cancel-input") {
             hideSaveAndCancel();
@@ -147,12 +148,29 @@ export function renderProjects() {
             const titleDiv = document.createElement("div");
             const titleLabel = document.createElement("label");
             const titleInput = document.createElement("input");
-            titleLabel.textContent = "Title: "
+            titleLabel.textContent = "Title: ";
             titleInput.value = listItem.title;
             titleInput.id = "task-title"
-            titleDiv.id = "title-div"
+            titleDiv.classList.add("title-div");
             titleDiv.append(titleLabel, titleInput);
             newItemDiv.appendChild(titleDiv);
+
+            //add item details -- description 
+            const descriptionDiv = document.createElement("div");
+            const descriptionLabel = document.createElement("label");
+            const descriptionInput = document.createElement("input");
+            descriptionLabel.textContent = "Description: ";
+            descriptionInput.value = listItem.description;
+            descriptionInput.id = "description-title";
+            descriptionDiv.classList.add("description-div");
+            descriptionDiv.append(descriptionLabel, descriptionInput);
+            newItemDiv.appendChild(descriptionDiv);
+
+            //add item details -- due date 
+
+
+
+
             //newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
             
             
@@ -170,3 +188,4 @@ export function renderProjects() {
 }
 
 
+//update line 164 and for hte other section to replace id with classlist
