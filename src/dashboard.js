@@ -29,43 +29,52 @@ export function bindEvents() {
 
     content.addEventListener("click", (event) => {
 
-
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();
             addToDoProjectId = event.target.id;
             return;
-        } else if (event.target.id === "task-title") {
+        } else if (event.target.classList.contains("task-input")) {
+            if (document.getElementById("save-input")) {
+                document.getElementById("save-input").remove();
+                document.getElementById("cancel-input").remove();
+            }
             showSaveAndCancel(event.target.closest("div"));
+        } else if (event.target.parentElement.classList.contains("priority-div")) {
+            alert("hi")
+
         } else if (event.target.id === "save-input") {
             const toDo = findToDo(event.target.closest(".item").id);
             if (event.target.closest("div").classList.contains("title-div")) {
                 toDo.editTitle(event.target.parentElement.querySelector("input").value);
+                renderProjects();
+            } else if (event.target.closest("div").classList.contains("description-div")) {
+                toDo.editDescription(event.target.parentElement.querySelector("input").value);
+                renderProjects();
+            } else if (event.target.closest("div").classList.contains("due-date-div")) {
+                toDo.editDueDate(event.target.parentElement.querySelector("input").value);
+                renderProjects();
             }
-            hideSaveAndCancel();
         } else if (event.target.id === "cancel-input") {
-            hideSaveAndCancel();
+            renderProjects();
         }
     })
     }
 
+
+
+
 function showSaveAndCancel(divClicked) {
 
-    //create save and cancel buttons
-    const saveButton = document.createElement("button");
-    const cancelButton = document.createElement("button");
-    saveButton.id = "save-input";
-    cancelButton.id = "cancel-input"
-    saveButton.innerText = "Save";
-    cancelButton.innerText = "Cancel";
-    divClicked.append(cancelButton, saveButton);
+//create save and cancel buttons
+const saveButton = document.createElement("button");
+const cancelButton = document.createElement("button");
+saveButton.id = "save-input";
+cancelButton.id = "cancel-input"
+saveButton.innerText = "Save";
+cancelButton.innerText = "Cancel";
+divClicked.append(cancelButton, saveButton);
 }
 
-function hideSaveAndCancel() {
-    const saveButton = document.getElementById("save-input");
-    const cancelButton = document.getElementById("cancel-input");
-    saveButton.remove();
-    cancelButton.remove();
-}
 
 function openProjectDialog() {
     projectDialog.showModal();
@@ -150,7 +159,7 @@ export function renderProjects() {
             const titleInput = document.createElement("input");
             titleLabel.textContent = "Title: ";
             titleInput.value = listItem.title;
-            titleInput.id = "task-title"
+            titleInput.classList.add("task-input");
             titleDiv.classList.add("title-div");
             titleDiv.append(titleLabel, titleInput);
             newItemDiv.appendChild(titleDiv);
@@ -161,17 +170,37 @@ export function renderProjects() {
             const descriptionInput = document.createElement("input");
             descriptionLabel.textContent = "Description: ";
             descriptionInput.value = listItem.description;
-            descriptionInput.id = "description-title";
+            descriptionInput.classList.add("task-input");
             descriptionDiv.classList.add("description-div");
             descriptionDiv.append(descriptionLabel, descriptionInput);
             newItemDiv.appendChild(descriptionDiv);
 
             //add item details -- due date 
+            const dueDateDiv = document.createElement("div");
+            const dueDateLabel = document.createElement("label");
+            const dueDateInput = document.createElement("input");
+            dueDateLabel.textContent = "Due Date: ";
+            dueDateInput.value = listItem.dueDate;
+            dueDateInput.classList.add("task-input"); 
+            dueDateDiv.classList.add("due-date-div");
+            dueDateDiv.append(dueDateLabel, dueDateInput);
+            newItemDiv.appendChild(dueDateDiv);
+
+            //add item details -- priority
+            const priorityDiv = document.createElement("div");
+            const priorityLabel = document.createElement("label");
+            const priorityInput = document.createElement("input");
+            priorityLabel.textContent = "Priority: ";
+            priorityInput.value = listItem.priority;
+            priorityDiv.classList.add("priority-div");
+            priorityDiv.append(priorityLabel, priorityInput);
+            newItemDiv.appendChild(priorityDiv);
 
 
 
 
-            //newItemDiv.innerText = `Title: ${listItem.title} \n Description: ${listItem.description} \n Due Date: ${listItem.dueDate} \n Priority: ${listItem.priority}`
+
+            //Priority, complete
             
             
 
@@ -188,4 +217,3 @@ export function renderProjects() {
 }
 
 
-//update line 164 and for hte other section to replace id with classlist
