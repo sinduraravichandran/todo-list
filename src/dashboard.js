@@ -60,7 +60,17 @@ export function bindEvents() {
     })
     }
 
+function editPriority() {
+    const data = ["High", "Medium", "Low"];
+    const select = document.createElement("select");
 
+    data.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item;
+        option.text = item;
+        select.appendChild(option);
+    })
+}
 
 
 function showSaveAndCancel(divClicked) {
