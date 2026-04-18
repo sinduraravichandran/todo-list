@@ -6,7 +6,7 @@ import { renderProjects, bindEvents } from "./dashboard.js";
 const defaultProject = addProject("Default Project");
 addProject("Another Project");
 console.log(getProjects())
-addToDo("call doctor", "call dr palma", "10/31/1994", "high", defaultProject.id)
+addToDo("call doctor", "call dr palma", "10/31/1994", "High", defaultProject.id)
 renderProjects();
 bindEvents();
 

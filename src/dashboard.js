@@ -16,7 +16,6 @@ const taskDescription = document.getElementById("task-description");
 const taskDueDate = document.getElementById("task-due-date");
 const taskPriority = document.querySelectorAll('input[name="task-priority"]');
 let addToDoProjectId;
-let editToDoTaskId;
 
 
 //bind events
@@ -26,6 +25,14 @@ export function bindEvents() {
     cancelProjectDialogButton.addEventListener("click", closeProjectDialog);
     cancelTaskDialogButton.addEventListener("click", closeTaskDialog);
     createTaskDialogButton.addEventListener("click", createTaskUI);
+
+    content.addEventListener("change", (event) => {
+        if (event.target.id === "priority-select") {
+            const toDo = findToDo(event.target.closest(".item").id);
+            toDo.editPriority(event.target.value);
+            console.log(getProjects())
+        }
+    })
 
     content.addEventListener("click", (event) => {
 
@@ -39,9 +46,6 @@ export function bindEvents() {
                 document.getElementById("cancel-input").remove();
             }
             showSaveAndCancel(event.target.closest("div"));
-        } else if (event.target.parentElement.classList.contains("priority-div")) {
-            alert("hi")
-
         } else if (event.target.id === "save-input") {
             const toDo = findToDo(event.target.closest(".item").id);
             if (event.target.closest("div").classList.contains("title-div")) {
@@ -53,24 +57,12 @@ export function bindEvents() {
             } else if (event.target.closest("div").classList.contains("due-date-div")) {
                 toDo.editDueDate(event.target.parentElement.querySelector("input").value);
                 renderProjects();
-            }
+            } 
         } else if (event.target.id === "cancel-input") {
             renderProjects();
-        }
+        } 
     })
     }
-
-function editPriority() {
-    const data = ["High", "Medium", "Low"];
-    const select = document.createElement("select");
-
-    data.forEach(item => {
-        const option = document.createElement("option");
-        option.value = item;
-        option.text = item;
-        select.appendChild(option);
-    })
-}
 
 
 function showSaveAndCancel(divClicked) {
@@ -141,8 +133,6 @@ export function renderProjects() {
 
     content.innerHTML = '';
 
-
-
     //for each project in the array
     projects.forEach(element => {
     
@@ -199,18 +189,45 @@ export function renderProjects() {
             //add item details -- priority
             const priorityDiv = document.createElement("div");
             const priorityLabel = document.createElement("label");
-            const priorityInput = document.createElement("input");
-            priorityLabel.textContent = "Priority: ";
-            priorityInput.value = listItem.priority;
+            const select = document.createElement("select");
+            const data = ["High", "Medium", "Low"];
+
+            priorityLabel.textContent = "Priority: "
+
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item;
+                option.text = item;
+                select.appendChild(option);
+            })            
+
+            select.value = listItem.priority;
+            select.id = "priority-select"
             priorityDiv.classList.add("priority-div");
-            priorityDiv.append(priorityLabel, priorityInput);
+            priorityDiv.append(priorityLabel, select);
             newItemDiv.appendChild(priorityDiv);
+    
+   
+            //add item details - complete 
+            const completeDiv = document.createElement("div");
+            const completeLabel = document.createElement("label");
+            const completeSelect = document.createElement("select");
+            const completeData = ["Yes", "No"];
 
+            completeLabel.textContent = "Complete: "
 
+            completeData.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item;
+                option.text = item;
+                completeSelect.appendChild(option);
+            })            
 
-
-
-            //Priority, complete
+            completeSelect.value = listItem.priority;
+            completeSelect.id = "complete-select"
+            completeDiv.classList.add("complete-div");
+            completeDiv.append(completeLabel, completeSelect);
+            newItemDiv.appendChild(completeDiv);
             
             
 
@@ -227,3 +244,6 @@ export function renderProjects() {
 }
 
 
+//fix why Complete is not showing up
+//when user completes, it should go to the bottom 
+//delete to do 

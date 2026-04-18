@@ -7,7 +7,7 @@ export function createToDo(title, description, dueDate, priority, project) {
         dueDate, 
         priority, 
         project, 
-        complete: false,
+        complete: "No",
 
         markComplete() {
             this.complete = !this.complete;
