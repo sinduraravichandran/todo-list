@@ -10,7 +10,11 @@ export function createToDo(title, description, dueDate, priority, project) {
         complete: "No",
 
         markComplete() {
-            this.complete = !this.complete;
+            if (this.complete === "No") {
+                this.complete = "Yes";
+            } else {
+                this.complete = "No";
+            }
         },
 
         editDueDate(newDate) {

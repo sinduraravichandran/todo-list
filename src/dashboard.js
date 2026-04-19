@@ -31,6 +31,12 @@ export function bindEvents() {
             const toDo = findToDo(event.target.closest(".item").id);
             toDo.editPriority(event.target.value);
             console.log(getProjects())
+        } else if (event.target.id === "complete-select") {
+            console.log(getProjects())
+            const toDo = findToDo(event.target.closest(".item").id);
+            toDo.markComplete();
+            renderProjects()
+
         }
     })
 
@@ -147,91 +153,182 @@ export function renderProjects() {
         //for each item in the to do list array (each item is a task)
         element.toDoList.forEach(listItem => {
 
-            //create new to do div and add class
-            const newItemDiv = document.createElement("div");
-            newItemDiv.classList.add("item");
-            newItemDiv.id = listItem.id;
-            newProjectDiv.appendChild(newItemDiv);
+            //render incomplete tiles first
+            if (listItem.complete === "No") {
+                //create new to do div and add class
+                const newItemDiv = document.createElement("div");
+                newItemDiv.classList.add("item");
+                newItemDiv.id = listItem.id; 
+                newProjectDiv.appendChild(newItemDiv);
 
-            //add item details -- title 
-            const titleDiv = document.createElement("div");
-            const titleLabel = document.createElement("label");
-            const titleInput = document.createElement("input");
-            titleLabel.textContent = "Title: ";
-            titleInput.value = listItem.title;
-            titleInput.classList.add("task-input");
-            titleDiv.classList.add("title-div");
-            titleDiv.append(titleLabel, titleInput);
-            newItemDiv.appendChild(titleDiv);
+                //add item details -- title 
+                const titleDiv = document.createElement("div");
+                const titleLabel = document.createElement("label");
+                const titleInput = document.createElement("input");
+                titleLabel.textContent = "Title: ";
+                titleInput.value = listItem.title;
+                titleInput.classList.add("task-input");
+                titleDiv.classList.add("title-div");
+                titleDiv.append(titleLabel, titleInput);
+                newItemDiv.appendChild(titleDiv);
 
-            //add item details -- description 
-            const descriptionDiv = document.createElement("div");
-            const descriptionLabel = document.createElement("label");
-            const descriptionInput = document.createElement("input");
-            descriptionLabel.textContent = "Description: ";
-            descriptionInput.value = listItem.description;
-            descriptionInput.classList.add("task-input");
-            descriptionDiv.classList.add("description-div");
-            descriptionDiv.append(descriptionLabel, descriptionInput);
-            newItemDiv.appendChild(descriptionDiv);
+                //add item details -- description 
+                const descriptionDiv = document.createElement("div");
+                const descriptionLabel = document.createElement("label");
+                const descriptionInput = document.createElement("input");
+                descriptionLabel.textContent = "Description: ";
+                descriptionInput.value = listItem.description;
+                descriptionInput.classList.add("task-input");
+                descriptionDiv.classList.add("description-div");
+                descriptionDiv.append(descriptionLabel, descriptionInput);
+                newItemDiv.appendChild(descriptionDiv);
 
-            //add item details -- due date 
-            const dueDateDiv = document.createElement("div");
-            const dueDateLabel = document.createElement("label");
-            const dueDateInput = document.createElement("input");
-            dueDateLabel.textContent = "Due Date: ";
-            dueDateInput.value = listItem.dueDate;
-            dueDateInput.classList.add("task-input"); 
-            dueDateDiv.classList.add("due-date-div");
-            dueDateDiv.append(dueDateLabel, dueDateInput);
-            newItemDiv.appendChild(dueDateDiv);
+                //add item details -- due date 
+                const dueDateDiv = document.createElement("div");
+                const dueDateLabel = document.createElement("label");
+                const dueDateInput = document.createElement("input");
+                dueDateLabel.textContent = "Due Date: ";
+                dueDateInput.value = listItem.dueDate;
+                dueDateInput.classList.add("task-input"); 
+                dueDateDiv.classList.add("due-date-div");
+                dueDateDiv.append(dueDateLabel, dueDateInput);
+                newItemDiv.appendChild(dueDateDiv);
 
-            //add item details -- priority
-            const priorityDiv = document.createElement("div");
-            const priorityLabel = document.createElement("label");
-            const select = document.createElement("select");
-            const data = ["High", "Medium", "Low"];
+                //add item details -- priority
+                const priorityDiv = document.createElement("div");
+                const priorityLabel = document.createElement("label");
+                const select = document.createElement("select");
+                const data = ["High", "Medium", "Low"];
 
-            priorityLabel.textContent = "Priority: "
+                priorityLabel.textContent = "Priority: "
 
-            data.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item;
-                option.text = item;
-                select.appendChild(option);
-            })            
+                data.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    select.appendChild(option);
+                })            
 
-            select.value = listItem.priority;
-            select.id = "priority-select"
-            priorityDiv.classList.add("priority-div");
-            priorityDiv.append(priorityLabel, select);
-            newItemDiv.appendChild(priorityDiv);
+                select.value = listItem.priority;
+                select.id = "priority-select"
+                priorityDiv.classList.add("priority-div");
+                priorityDiv.append(priorityLabel, select);
+                newItemDiv.appendChild(priorityDiv);
+        
     
-   
-            //add item details - complete 
-            const completeDiv = document.createElement("div");
-            const completeLabel = document.createElement("label");
-            const completeSelect = document.createElement("select");
-            const completeData = ["Yes", "No"];
+                //add item details - complete 
+                const completeDiv = document.createElement("div");
+                const completeLabel = document.createElement("label");
+                const completeSelect = document.createElement("select");
+                const completeData = ["Yes", "No"];
 
-            completeLabel.textContent = "Complete: "
+                completeLabel.textContent = "Complete: "
 
-            completeData.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item;
-                option.text = item;
-                completeSelect.appendChild(option);
-            })            
+                completeData.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    completeSelect.appendChild(option);
+                })            
 
-            completeSelect.value = listItem.priority;
-            completeSelect.id = "complete-select"
-            completeDiv.classList.add("complete-div");
-            completeDiv.append(completeLabel, completeSelect);
-            newItemDiv.appendChild(completeDiv);
-            
-            
+                completeSelect.value = listItem.complete;
+                completeSelect.id = "complete-select"
+                completeDiv.classList.add("complete-div");
+                completeDiv.append(completeLabel, completeSelect);
+                newItemDiv.appendChild(completeDiv);
+        } 
+    }
+    )
 
-        })
+        //now render all the complete ones
+        element.toDoList.forEach(listItem => {
+
+            //render incomplete tiles first
+            if (listItem.complete === "Yes") {
+                //create new to do div and add class
+                const newItemDiv = document.createElement("div");
+                newItemDiv.classList.add("item");
+                newItemDiv.id = listItem.id; 
+                newProjectDiv.appendChild(newItemDiv);
+
+                //add item details -- title 
+                const titleDiv = document.createElement("div");
+                const titleLabel = document.createElement("label");
+                const titleInput = document.createElement("input");
+                titleLabel.textContent = "Title: ";
+                titleInput.value = listItem.title;
+                titleInput.classList.add("task-input");
+                titleDiv.classList.add("title-div");
+                titleDiv.append(titleLabel, titleInput);
+                newItemDiv.appendChild(titleDiv);
+
+                //add item details -- description 
+                const descriptionDiv = document.createElement("div");
+                const descriptionLabel = document.createElement("label");
+                const descriptionInput = document.createElement("input");
+                descriptionLabel.textContent = "Description: ";
+                descriptionInput.value = listItem.description;
+                descriptionInput.classList.add("task-input");
+                descriptionDiv.classList.add("description-div");
+                descriptionDiv.append(descriptionLabel, descriptionInput);
+                newItemDiv.appendChild(descriptionDiv);
+
+                //add item details -- due date 
+                const dueDateDiv = document.createElement("div");
+                const dueDateLabel = document.createElement("label");
+                const dueDateInput = document.createElement("input");
+                dueDateLabel.textContent = "Due Date: ";
+                dueDateInput.value = listItem.dueDate;
+                dueDateInput.classList.add("task-input"); 
+                dueDateDiv.classList.add("due-date-div");
+                dueDateDiv.append(dueDateLabel, dueDateInput);
+                newItemDiv.appendChild(dueDateDiv);
+
+                //add item details -- priority
+                const priorityDiv = document.createElement("div");
+                const priorityLabel = document.createElement("label");
+                const select = document.createElement("select");
+                const data = ["High", "Medium", "Low"];
+
+                priorityLabel.textContent = "Priority: "
+
+                data.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    select.appendChild(option);
+                })            
+
+                select.value = listItem.priority;
+                select.id = "priority-select"
+                priorityDiv.classList.add("priority-div");
+                priorityDiv.append(priorityLabel, select);
+                newItemDiv.appendChild(priorityDiv);
+        
+    
+                //add item details - complete 
+                const completeDiv = document.createElement("div");
+                const completeLabel = document.createElement("label");
+                const completeSelect = document.createElement("select");
+                const completeData = ["Yes", "No"];
+
+                completeLabel.textContent = "Complete: "
+
+                completeData.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    completeSelect.appendChild(option);
+                })            
+
+                completeSelect.value = listItem.complete;
+                completeSelect.id = "complete-select"
+                completeDiv.classList.add("complete-div");
+                completeDiv.append(completeLabel, completeSelect);
+                newItemDiv.appendChild(completeDiv);
+        } 
+    }
+    )
 
         //add new todo button
         const newItemButton = document.createElement("button");
@@ -240,10 +337,10 @@ export function renderProjects() {
         newItemButton.classList.add("addToDoButton");
         newProjectDiv.appendChild(newItemButton);
 
+
     });
 }
 
 
-//fix why Complete is not showing up
-//when user completes, it should go to the bottom 
+//when its' complete make it light pink
 //delete to do 

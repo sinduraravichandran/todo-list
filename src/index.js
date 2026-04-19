@@ -7,6 +7,7 @@ const defaultProject = addProject("Default Project");
 addProject("Another Project");
 console.log(getProjects())
 addToDo("call doctor", "call dr palma", "10/31/1994", "High", defaultProject.id)
+addToDo("call dentist", "call tooth", "10/3/1994", "Low", defaultProject.id)
 renderProjects();
 bindEvents();
 
