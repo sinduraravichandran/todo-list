@@ -39,7 +39,11 @@ input {
     padding: 5px;
 }
 
-.addToDoButton {
+.item-complete {
+    opacity: 0.5;
+}
+
+.addToDoButton, .deleteToDoButton {
     background-color: plum;
     padding: 5px;
     border-radius: 20px;

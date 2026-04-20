@@ -1,4 +1,4 @@
-import { getProjects, addProject, addToDo, findToDo } from "./store.js"
+import { getProjects, addProject, addToDo, findToDo, deleteProject } from "./store.js"
 import "./style.css"
 
 //get html elements
@@ -35,7 +35,7 @@ export function bindEvents() {
             console.log(getProjects())
             const toDo = findToDo(event.target.closest(".item").id);
             toDo.markComplete();
-            renderProjects()
+            renderProjects();
 
         }
     })
@@ -46,7 +46,11 @@ export function bindEvents() {
             openTaskDialog();
             addToDoProjectId = event.target.id;
             return;
-        } else if (event.target.classList.contains("task-input")) {
+        } else if (event.target.classList.contains("delete-project")) {
+            deleteProject(event.target.id);
+            renderProjects();
+        }
+        else if (event.target.classList.contains("task-input")) {
             if (document.getElementById("save-input")) {
                 document.getElementById("save-input").remove();
                 document.getElementById("cancel-input").remove();
@@ -150,6 +154,13 @@ export function renderProjects() {
         newProjectDiv.innerText = element.name;
         content.appendChild(newProjectDiv);
 
+        //add delete project button
+        const deleteProject = document.createElement("button");
+        deleteProject.innerText = "Delete";
+        deleteProject.id = element.id;
+        deleteProject.classList.add("delete-project")
+        newProjectDiv.appendChild(deleteProject);
+
         //for each item in the to do list array (each item is a task)
         element.toDoList.forEach(listItem => {
 
@@ -248,6 +259,7 @@ export function renderProjects() {
                 //create new to do div and add class
                 const newItemDiv = document.createElement("div");
                 newItemDiv.classList.add("item");
+                newItemDiv.classList.add("item-complete")
                 newItemDiv.id = listItem.id; 
                 newProjectDiv.appendChild(newItemDiv);
 
@@ -341,6 +353,5 @@ export function renderProjects() {
     });
 }
 
-
-//when its' complete make it light pink
 //delete to do 
+//delete project
