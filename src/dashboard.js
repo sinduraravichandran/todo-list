@@ -42,6 +42,7 @@ export function bindEvents() {
 
     content.addEventListener("click", (event) => {
 
+
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();
             addToDoProjectId = event.target.id;
@@ -49,6 +50,7 @@ export function bindEvents() {
         } else if (event.target.classList.contains("delete-project")) {
             deleteProject(event.target.id);
             renderProjects();
+            console.log(getProjects())
         }
         else if (event.target.classList.contains("task-input")) {
             if (document.getElementById("save-input")) {

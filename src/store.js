@@ -39,7 +39,6 @@ export function findToDo(id) {
 
 export function deleteProject(id) {
     const deleteIndex = toDoListProjects.find((project) => project.id = id);
-    console.log(toDoListProjects.splice(deleteIndex, 1));
     return toDoListProjects.splice(deleteIndex, 1);
 
 }
