@@ -36,12 +36,10 @@ export function bindEvents() {
             const toDo = findToDo(event.target.closest(".item").id);
             toDo.markComplete();
             renderProjects();
-
         }
     })
 
     content.addEventListener("click", (event) => {
-
 
         if (event.target.classList.contains("addToDoButton")) {
             openTaskDialog();

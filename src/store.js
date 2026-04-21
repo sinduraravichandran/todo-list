@@ -38,8 +38,8 @@ export function findToDo(id) {
 
 
 export function deleteProject(id) {
-    const deleteIndex = toDoListProjects.find((project) => project.id = id);
-    return toDoListProjects.splice(deleteIndex, 1);
+    const deleteIndex = toDoListProjects.findIndex((project) => project.id === id);
+    toDoListProjects.splice(deleteIndex, 1);
 
 }
 
