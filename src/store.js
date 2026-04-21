@@ -43,3 +43,8 @@ export function deleteProject(id) {
 
 }
 
+export function deleteTask(taskId, projectId) {
+
+}
+
+//working on the function to find and delete task 

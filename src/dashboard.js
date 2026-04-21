@@ -70,7 +70,9 @@ export function bindEvents() {
             } 
         } else if (event.target.id === "cancel-input") {
             renderProjects();
-        } 
+        }  else if (event.target.classList.contains("delete-task")) {
+            
+        }
     })
     }
 
@@ -247,6 +249,14 @@ export function renderProjects() {
                 completeDiv.classList.add("complete-div");
                 completeDiv.append(completeLabel, completeSelect);
                 newItemDiv.appendChild(completeDiv);
+
+
+                //add delete task item
+                const deleteTask = document.createElement("button");
+                deleteTask.innerText = "Delete To Do";
+                deleteTask.classList.add("delete-task");
+                deleteTask.id = listItem.id;
+                newItemDiv.appendChild(deleteTask);
         } 
     }
     )
@@ -338,6 +348,13 @@ export function renderProjects() {
                 completeDiv.classList.add("complete-div");
                 completeDiv.append(completeLabel, completeSelect);
                 newItemDiv.appendChild(completeDiv);
+
+                //add delete task item
+                const deleteTask = document.createElement("button");
+                deleteTask.innerText = "Delete To Do";
+                deleteTask.classList.add("delete-task");
+                deleteTask.id = listItem.id;
+                newItemDiv.appendChild(deleteTask);
         } 
     }
     )
@@ -354,4 +371,3 @@ export function renderProjects() {
 }
 
 //delete to do 
-//delete project
