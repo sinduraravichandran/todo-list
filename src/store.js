@@ -12,13 +12,15 @@ export function addToDo(title, description, dueDate, priority, project) {
     }
     const newToDo = createToDo(title, description, dueDate, priority, project);
         
-    toDoListProjects[returnProjectIndex(project)].toDoList.push(newToDo)
+    toDoListProjects[returnProjectIndex(project)].toDoList.push(newToDo);
+    populateStorage();
 }
 
 //call createProject and add it to array
 export function addProject(name) {
     const newProject = createProject(name);
     toDoListProjects.push(newProject);
+    populateStorage();
     return newProject;
 }
 
@@ -49,6 +51,7 @@ export function deleteTask(id) {
         for (let j=0; j<toDoListProjects[i].toDoList.length; j++) {
             if (toDoListProjects[i].toDoList[j].id === id) {
                 toDoListProjects[i].toDoList.splice(j,1);
+                populateStorage();
             }
         }
     }
@@ -56,4 +59,6 @@ export function deleteTask(id) {
 
 }
 
-//working on the function to find and delete task 
+export function populateStorage() {
+    localStorage.setItem("projectArray", JSON.stringify(toDoListProjects));
+}

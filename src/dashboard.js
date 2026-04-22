@@ -371,4 +371,3 @@ export function renderProjects() {
     });
 }
 
-//delete to do 
