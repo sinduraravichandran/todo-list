@@ -43,7 +43,16 @@ export function deleteProject(id) {
 
 }
 
-export function deleteTask(taskId, projectId) {
+export function deleteTask(id) {
+
+    for (let i=0; i<toDoListProjects.length; i++) {
+        for (let j=0; j<toDoListProjects[i].toDoList.length; j++) {
+            if (toDoListProjects[i].toDoList[j].id === id) {
+                toDoListProjects[i].toDoList.splice(j,1);
+            }
+        }
+    }
+
 
 }
 

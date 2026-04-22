@@ -1,4 +1,4 @@
-import { getProjects, addProject, addToDo, findToDo, deleteProject } from "./store.js"
+import { getProjects, addProject, addToDo, findToDo, deleteProject, deleteTask} from "./store.js"
 import "./style.css"
 
 //get html elements
@@ -71,7 +71,8 @@ export function bindEvents() {
         } else if (event.target.id === "cancel-input") {
             renderProjects();
         }  else if (event.target.classList.contains("delete-task")) {
-            
+            deleteTask(event.target.id);
+            renderProjects();
         }
     })
     }
