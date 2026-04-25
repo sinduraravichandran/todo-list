@@ -2,59 +2,71 @@
     box-sizing: border-box;
     margin: 0;
     border: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+    color: #3b0d11;
+    margin-bottom: 10px;
 }
 
 body {
-    background-color: lightblue;
-    margin-left: 200px;
-
+    background-color: #eec584;
+    margin: 20px;
 }
 
 .project {
-    background-color: aliceblue;
-    color: black;
+    background-color: #ba5624;
+    color: #3b0d11;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#project-dialog, #task-dialog {
+    background-color: #95A07A;
+    color: #3B0D11
 }
 
 #content {
+    margin-top: 10px;
     display: flex;
     gap: 10px;
 
 }
 
-input {
-    border: 1px black solid;
+input, select {
+    border: 1px 3b0d11 solid;
+    border-radius: 5px;
+    color: #3b0d11;
+    background-color: #eec584;
 }
 
 
-
 .item {
-    width: 80%;
-    background-color: magenta;
-    color: white;
+    background-color: #95A07A;
+    color: #3b0d11;
     border: 1px grey solid;
     padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .item-complete {
     opacity: 0.5;
 }
 
-.addToDoButton, .deleteToDoButton {
-    background-color: plum;
+.button {
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 5px;
+    background-color: #093824;
+    color: #eec584;
 }
-
-.editToDoButton {
-    padding: 5px;
-    border-radius: 20px;
-    background-color: lightgrey;
-}
-
 
 dialog:open {
     margin: auto;

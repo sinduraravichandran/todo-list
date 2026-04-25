@@ -93,6 +93,8 @@ saveButton.id = "save-input";
 cancelButton.id = "cancel-input"
 saveButton.innerText = "Save";
 cancelButton.innerText = "Cancel";
+saveButton.classList.add("button");
+cancelButton.classList.add("cancel");
 divClicked.append(cancelButton, saveButton);
 }
 
@@ -174,6 +176,7 @@ export function renderProjects() {
         deleteProject.innerText = "Delete";
         deleteProject.id = element.id;
         deleteProject.classList.add("delete-project")
+        deleteProject.classList.add("button");
         newProjectDiv.appendChild(deleteProject);
 
         //for each item in the to do list array (each item is a task)
@@ -268,6 +271,7 @@ export function renderProjects() {
                 const deleteTask = document.createElement("button");
                 deleteTask.innerText = "Delete To Do";
                 deleteTask.classList.add("delete-task");
+                deleteTask.classList.add("button");
                 deleteTask.id = listItem.id;
                 newItemDiv.appendChild(deleteTask);
         } 
@@ -366,6 +370,7 @@ export function renderProjects() {
                 const deleteTask = document.createElement("button");
                 deleteTask.innerText = "Delete To Do";
                 deleteTask.classList.add("delete-task");
+                deleteTask.classList.add("button");
                 deleteTask.id = listItem.id;
                 newItemDiv.appendChild(deleteTask);
         } 
@@ -377,6 +382,7 @@ export function renderProjects() {
         newItemButton.innerText = "Add To Do";
         newItemButton.id = element.id;
         newItemButton.classList.add("addToDoButton");
+        newItemButton.classList.add("button");
         newProjectDiv.appendChild(newItemButton);
 
 
@@ -384,7 +390,3 @@ export function renderProjects() {
 }
 
 
-
-//bugs
-//create new project not working
-//local storage is storing a lot of stuff 

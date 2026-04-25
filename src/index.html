@@ -7,13 +7,13 @@
     </head>
     <body>
         <h1>To-Do List</h1>
-        <button id="newProjectButton">Create New Project</button>
+        <button id="newProjectButton" class="button">Create New Project</button>
         <dialog id="project-dialog">
             <h2>New Project</h2>
             <label for="project-name">Enter new project name: </label>
             <input type="text" id="project-name">
-            <button id="create-project-dialog-btn">Create</button>
-            <button id="cancel-project-dialog-btn">Cancel</button>
+            <button id="create-project-dialog-btn" class="button">Create</button>
+            <button id="cancel-project-dialog-btn" class="button">Cancel</button>
         </dialog>
         <dialog id="task-dialog">
             <h2>New Task</h2>
@@ -32,8 +32,8 @@
                 <input type="radio" id="high" name="task-priority" value="High">
                 <label for="high">High</label>
             </fieldset>
-            <button id="create-task-dialog-btn">Create</button>
-            <button id="cancel-task-dialog-btn">Cancel</button>
+            <button id="create-task-dialog-btn" class="button">Create</button>
+            <button id="cancel-task-dialog-btn" class="button">Cancel</button>
         </dialog>
         <div id="content"></div>
     </body>
