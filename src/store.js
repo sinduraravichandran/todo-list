@@ -3,7 +3,17 @@ import { createToDo } from "./todo.js"
 
 
 //this is the array that will hold project objects. project objects will hold to-do-lists
-const toDoListProjects = [];
+let toDoListProjects = [];
+getLocalStorageValues();
+
+function getLocalStorageValues() {
+    let projectArray = JSON.parse(localStorage.getItem("projectArray"));
+    if (projectArray) {
+        toDoListProjects = projectArray;
+    }
+    
+}
+
 
 //call createToDo and add it to array
 export function addToDo(title, description, dueDate, priority, project) {
@@ -55,7 +65,6 @@ export function deleteTask(id) {
             }
         }
     }
-
 
 }
 

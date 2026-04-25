@@ -1,4 +1,4 @@
-import { getProjects, addProject, addToDo, findToDo, deleteProject, deleteTask} from "./store.js"
+import { getProjects, addProject, addToDo, findToDo, deleteProject, deleteTask, populateStorage} from "./store.js"
 import "./style.css"
 
 //get html elements
@@ -30,11 +30,12 @@ export function bindEvents() {
         if (event.target.id === "priority-select") {
             const toDo = findToDo(event.target.closest(".item").id);
             toDo.editPriority(event.target.value);
-            console.log(getProjects())
+            populateStorage();
         } else if (event.target.id === "complete-select") {
             console.log(getProjects())
             const toDo = findToDo(event.target.closest(".item").id);
             toDo.markComplete();
+            populateStorage();
             renderProjects();
         }
     })
@@ -47,6 +48,7 @@ export function bindEvents() {
             return;
         } else if (event.target.classList.contains("delete-project")) {
             deleteProject(event.target.id);
+            populateStorage();
             renderProjects();
             console.log(getProjects())
         }
@@ -60,18 +62,22 @@ export function bindEvents() {
             const toDo = findToDo(event.target.closest(".item").id);
             if (event.target.closest("div").classList.contains("title-div")) {
                 toDo.editTitle(event.target.parentElement.querySelector("input").value);
+                populateStorage();
                 renderProjects();
             } else if (event.target.closest("div").classList.contains("description-div")) {
                 toDo.editDescription(event.target.parentElement.querySelector("input").value);
+                populateStorage();
                 renderProjects();
             } else if (event.target.closest("div").classList.contains("due-date-div")) {
                 toDo.editDueDate(event.target.parentElement.querySelector("input").value);
+                populateStorage();
                 renderProjects();
             } 
         } else if (event.target.id === "cancel-input") {
             renderProjects();
         }  else if (event.target.classList.contains("delete-task")) {
             deleteTask(event.target.id);
+            populateStorage();
             renderProjects();
         }
     })
@@ -105,6 +111,7 @@ function createProjectUI() {
         alert("Project name is required")
     } else {
         addProject(projectNameInput.value);
+        populateStorage();
         projectNameInput.value = '';
         projectDialog.close();
         renderProjects();
@@ -131,6 +138,7 @@ function createTaskUI() {
     } else {
         const taskPrioritySelected = document.querySelector('input[name="task-priority"]:checked').value;
         addToDo(tasktName.value, taskDescription.value, taskDueDate.value, taskPrioritySelected, addToDoProjectId);
+        populateStorage();
         tasktName.value = '';
         taskDescription.value = '';
         taskDueDate.value = '';
@@ -143,6 +151,10 @@ function createTaskUI() {
 //get projects & display on the UI
 export function renderProjects() {
     const projects = getProjects();
+
+    if (projects.length === 0) {
+        addProject("My Project");
+    }
 
     content.innerHTML = '';
 
@@ -371,3 +383,8 @@ export function renderProjects() {
     });
 }
 
+
+
+//bugs
+//create new project not working
+//local storage is storing a lot of stuff 
