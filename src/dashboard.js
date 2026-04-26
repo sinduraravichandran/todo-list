@@ -94,7 +94,7 @@ cancelButton.id = "cancel-input"
 saveButton.innerText = "Save";
 cancelButton.innerText = "Cancel";
 saveButton.classList.add("button");
-cancelButton.classList.add("cancel");
+cancelButton.classList.add("button");
 divClicked.append(cancelButton, saveButton);
 }
 
@@ -389,4 +389,5 @@ export function renderProjects() {
     });
 }
 
+//have to fix edit functiona
 

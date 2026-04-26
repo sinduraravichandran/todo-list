@@ -59,6 +59,11 @@ input, select {
     gap: 5px;
 }
 
+.title-div, .description-div, .due-date-div, .priority-div, .complete-div {
+    display: flex;
+    gap: 5px; 
+}
+
 .item-complete {
     opacity: 0.5;
 }

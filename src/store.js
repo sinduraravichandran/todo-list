@@ -8,12 +8,31 @@ getLocalStorageValues();
 
 function getLocalStorageValues() {
     let projectArray = JSON.parse(localStorage.getItem("projectArray"));
+    console.log(projectArray);
+
+    //rebuild the projects
     if (projectArray) {
-        toDoListProjects = projectArray;
+        for (let i=0; i<projectArray.length; i++) {
+            const recreatedProject = createProject(projectArray[i].name);
+            recreatedProject.id = projectArray[i].id;
+            toDoListProjects.push(recreatedProject);
+        }
     }
     
+   
+    for (let i=0; i<projectArray.length; i++) {
+        if (projectArray[i].toDoList.length > 0) {
+            for (let j=0; j<projectArray[i].toDoList.length; j++) {
+            const recreatedTask = createToDo(projectArray[i].toDoList[j].title,
+                                projectArray[i].toDoList[j].description,
+                                projectArray[i].toDoList[j].dueDate,
+                                projectArray[i].toDoList[j].priority,
+                                projectArray[i].id)
+            recreatedTask.id = projectArray[i].toDoList[j].id;
+        }
+        }
+    }
 }
-
 
 //call createToDo and add it to array
 export function addToDo(title, description, dueDate, priority, project) {
